@@ -21,6 +21,8 @@ namespace ImageReader
         public List<string> imagePaths { get; set; } = new List<string>();
         public int index { get; set; }
         public int lastWidth { get; set; }
+        public int heightOffset { get; set; } = 0;
+        public float heightLocationOffset { get; set; } = 0;
         public ReadingScreen()
         {
             InitializeComponent();
@@ -29,6 +31,15 @@ namespace ImageReader
             masterPath = lastPath;
             ListDirectory(tv_Folders, lastPath);
 
+            this.MouseWheel += new MouseEventHandler(pnl_Map_MouseWheel);
+
+        }
+
+        private void pnl_Map_MouseWheel(object sender, MouseEventArgs e)
+        {
+            heightLocationOffset += e.Delta > 0 ? 30f : -30f;
+
+            ResizePB();
         }
 
         private void ReadingScreen_Load(object sender, EventArgs e)
@@ -98,17 +109,42 @@ namespace ImageReader
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {//https://stackoverflow.com/a/31464086
 
+
+            int zoomAmount = 100;
+            float heightOffset = 90f;
+
             switch (keyData)
             {
+                case Keys.NumPad6:
                 case Keys.Right:
                     SetImage(index + 1);
                     break;
+                case Keys.NumPad4:
                 case Keys.Left:
                     SetImage(index - 1);
+                    break;
+                case Keys.NumPad2:
+                case Keys.Down:
+                    heightLocationOffset += -heightOffset;
+                    break;
+                case Keys.NumPad8:
+                case Keys.Up:
+                    heightLocationOffset += heightOffset;
+                    break;
+                case Keys.Add:
+                    ZoomImage(zoomAmount);
+                    break;
+                case Keys.NumPad0:
+                    heightOffset = 0;
+                    heightLocationOffset = 0;
+                    break;
+                case Keys.Subtract:
+                    ZoomImage(-zoomAmount);
                     break;
                 default:
                     return base.ProcessCmdKey(ref msg, keyData);
             }
+            ResizePB();
             return true;
         }
 
@@ -143,7 +179,7 @@ namespace ImageReader
             Rectangle rect = Screen.GetWorkingArea(pnl_Background); // for width
             Size background = pnl_Background.Size;
 
-            float ratio = (float)background.Height / (float)pb_Main.Image.Height;
+            float ratio = (float)background.Height / ((float)pb_Main.Image.Height - heightOffset);
 
 
             pb_Main.Height = (int)(pb_Main.Height * ratio);
@@ -151,10 +187,15 @@ namespace ImageReader
 
 
 
-            pb_Main.Location = new Point((rect.Width - pb_Main.Width) / 2, 0);
+            pb_Main.Location = new Point((rect.Width - pb_Main.Width) / 2, (int)heightLocationOffset);
 
             ResumeLayout();
 
+        }
+        private void ZoomImage(int amount)
+        {
+            heightOffset += amount;
+            ResizePB();
         }
         private void SetOrder()
         {

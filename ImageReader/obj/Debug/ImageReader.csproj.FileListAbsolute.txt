@@ -9,3 +9,14 @@ C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.cspro
 C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.exe
 C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.pdb
 C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.ReadingScreen.resources
+D:\Github\ImageReader\ImageReader\bin\Debug\ImageReader.exe.config
+D:\Github\ImageReader\ImageReader\bin\Debug\ImageReader.exe
+D:\Github\ImageReader\ImageReader\bin\Debug\ImageReader.pdb
+D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.csproj.AssemblyReference.cache
+D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.Main.resources
+D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.Properties.Resources.resources
+D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.ReadingScreen.resources
+D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.csproj.GenerateResource.cache
+D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.csproj.CoreCompileInputs.cache
+D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.exe
+D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.pdb

@@ -30,6 +30,7 @@
         {
             this.pb_Main = new System.Windows.Forms.PictureBox();
             this.pnl_Background = new System.Windows.Forms.Panel();
+            this.btn_Collapse = new System.Windows.Forms.Button();
             this.lbl_LoadedPages = new System.Windows.Forms.Label();
             this.lbl_Load = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,7 +38,6 @@
             this.tv_Folders = new System.Windows.Forms.TreeView();
             this.btn_SelectDirectory = new System.Windows.Forms.Button();
             this.fbd_OpenFolder = new System.Windows.Forms.FolderBrowserDialog();
-            this.btn_Collapse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Main)).BeginInit();
             this.pnl_Background.SuspendLayout();
             this.SuspendLayout();
@@ -70,6 +70,17 @@
             this.pnl_Background.Size = new System.Drawing.Size(700, 450);
             this.pnl_Background.TabIndex = 0;
             this.pnl_Background.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pb_Main_MouseDown);
+            // 
+            // btn_Collapse
+            // 
+            this.btn_Collapse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_Collapse.Location = new System.Drawing.Point(3, 415);
+            this.btn_Collapse.Name = "btn_Collapse";
+            this.btn_Collapse.Size = new System.Drawing.Size(32, 32);
+            this.btn_Collapse.TabIndex = 4;
+            this.btn_Collapse.Text = "<";
+            this.btn_Collapse.UseVisualStyleBackColor = true;
+            this.btn_Collapse.Click += new System.EventHandler(this.btn_Collapse_Click);
             // 
             // lbl_LoadedPages
             // 
@@ -135,17 +146,6 @@
             this.btn_SelectDirectory.Text = "Open Folder";
             this.btn_SelectDirectory.UseVisualStyleBackColor = true;
             this.btn_SelectDirectory.Click += new System.EventHandler(this.btn_SelectDirectory_Click);
-            // 
-            // btn_Collapse
-            // 
-            this.btn_Collapse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_Collapse.Location = new System.Drawing.Point(3, 415);
-            this.btn_Collapse.Name = "btn_Collapse";
-            this.btn_Collapse.Size = new System.Drawing.Size(32, 32);
-            this.btn_Collapse.TabIndex = 4;
-            this.btn_Collapse.Text = "<";
-            this.btn_Collapse.UseVisualStyleBackColor = true;
-            this.btn_Collapse.Click += new System.EventHandler(this.btn_Collapse_Click);
             // 
             // ReadingScreen
             // 
