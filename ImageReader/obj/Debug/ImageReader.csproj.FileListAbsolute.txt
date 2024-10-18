@@ -1,0 +1,11 @@
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\bin\Debug\ImageReader.exe.config
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\bin\Debug\ImageReader.exe
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\bin\Debug\ImageReader.pdb
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.csproj.AssemblyReference.cache
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.Main.resources
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.Properties.Resources.resources
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.csproj.GenerateResource.cache
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.csproj.CoreCompileInputs.cache
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.exe
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.pdb
+C:\Users\DeCell\source\repos\ImageReader\ImageReader\obj\Debug\ImageReader.ReadingScreen.resources
