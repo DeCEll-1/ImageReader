@@ -1,4 +1,5 @@
 ﻿using FolderSelect;
+using ImageMagick;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,7 +66,7 @@ namespace ImageReader
             ListDirectory(tv_Folders, dialog.FileName);
         }
 
-        public static readonly string[] ImageExtensions = new string[] { ".JPG", ".JPEG", ".JPE", ".BMP", ".PNG" };
+        public static readonly string[] ImageExtensions = new string[] { ".JPG", ".JPEG", ".JPE", ".BMP", ".PNG", ".WEBP" };
         private async void tv_Folders_AfterSelect(object sender, TreeViewEventArgs e)
         {
             lbl_Load.Text = "Loading";
@@ -160,8 +161,28 @@ namespace ImageReader
             {
                 index = 0;
             }
+            string path = imagePaths[index];
+            Bitmap bitmap = null;
+            try
+            {
+                bitmap = new Bitmap(path);
+            }
+            catch (Exception)
+            {
+                // use 'MagickImage()' if you want just the 1st frame of an animated image. 
+                // 'MagickImageCollection()' returns all frames
+                using (var magickImages = new MagickImage(path))
+                {
+                    var ms = new MemoryStream();
+                    magickImages.Write(ms, MagickFormat.Jpg);
+                    bitmap?.Dispose();
+                    bitmap = new Bitmap(ms);
+                    // keep MemoryStream from being garbage collected while Bitmap is in use
+                    bitmap.Tag = ms;
+                }
+            }
 
-            pb_Main.Image = new Bitmap(imagePaths[index]);
+            pb_Main.Image = bitmap;
             this.index = index;
             string[] text = imagePaths[index].Split('\\');
             ((this.MdiParent) as Main).UpdatePage(text[text.Length - 1] + "\nIndex: " + index);
@@ -239,26 +260,6 @@ namespace ImageReader
                 }
             }
 
-            //List<string> sortedStrings = new List<string>();
-
-            //imagePaths.ForEach(s =>
-            //{
-            //    string[] array = s.Split('\\');
-            //    string fileName = array[array.Length - 1];
-
-            //    string file = fileName.Split('.')[0];
-
-            //    for (int i = file.Length; i < 3; i++)
-            //    {
-            //        file = (string)file.Prepend('0');
-            //    }
-
-            //    sortedStrings.Add(path + "\\" + file);
-
-            //});
-
-
-            //string g = "";
 
 
         }

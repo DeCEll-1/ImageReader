@@ -20,3 +20,11 @@ D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.csproj.GenerateResource.
 D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.csproj.CoreCompileInputs.cache
 D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.exe
 D:\Github\ImageReader\ImageReader\obj\Debug\ImageReader.pdb
+D:\Github\ImageReader\ImageReader\bin\Debug\Magick.Native-Q16-arm64.dll
+D:\Github\ImageReader\ImageReader\bin\Debug\Magick.Native-Q16-x64.dll
+D:\Github\ImageReader\ImageReader\bin\Debug\Magick.Native-Q16-x86.dll
+D:\Github\ImageReader\ImageReader\bin\Debug\Magick.NET-Q16-AnyCPU.dll
+D:\Github\ImageReader\ImageReader\bin\Debug\Magick.NET.Core.dll
+D:\Github\ImageReader\ImageReader\bin\Debug\Magick.NET-Q16-AnyCPU.xml
+D:\Github\ImageReader\ImageReader\bin\Debug\Magick.NET.Core.xml
+D:\Github\ImageReader\ImageReader\obj\Debug\ImageRea.A2ED2D00.Up2Date
