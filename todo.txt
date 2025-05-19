@@ -1,0 +1,1 @@
+TODO: implement a way of opening zip/folders instead of needing to do all the jazz (possibly on right click)
