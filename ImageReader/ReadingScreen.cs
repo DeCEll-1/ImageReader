@@ -22,8 +22,9 @@ namespace ImageReader
         public List<string> imagePaths { get; set; } = new List<string>();
         public int index { get; set; }
         public int lastWidth { get; set; }
-        public int heightOffset { get; set; } = 0;
+        public float zoomAmount { get; set; } = 0;
         public float heightLocationOffset { get; set; } = 0;
+        public float widthLocationOffset { get; set; } = 0;
         public ReadingScreen()
         {
             InitializeComponent();
@@ -70,7 +71,13 @@ namespace ImageReader
         private async void tv_Folders_AfterSelect(object sender, TreeViewEventArgs e)
         {
             lbl_Load.Text = "Loading";
-            string temp = tv_Folders.SelectedNode.Text;
+            string temp =
+                string.Join( // merge the string array together
+                    "\\", // merging seperation is \
+                    tv_Folders.SelectedNode.FullPath // our path that includes the master paths end directory
+                    .Split("\\".ToArray()) // split with \s since its the path seperator of the node tree
+                    .Skip(1) // skip the first one as its the last value of the master path
+                    );
             await Task.Run(() => LoadImages(temp));
 
             lbl_Load.Text = "Loaded";
@@ -109,22 +116,32 @@ namespace ImageReader
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {//https://stackoverflow.com/a/31464086
-
-
-            int zoomAmount = 100;
+            float zoomAmount = 0.1f;
             float heightOffset = 90f;
+            float widthOffset = 90f;
 
             switch (keyData)
             {
-                case Keys.NumPad6:
+                #region image switching
+                case Keys.NumPad9:
                 case Keys.Right:
                     SetImage(index + 1);
                     break;
-                case Keys.NumPad4:
+                case Keys.NumPad7:
                 case Keys.Left:
                     SetImage(index - 1);
                     break;
-                case Keys.NumPad2:
+                #endregion
+                #region right and left
+                case Keys.NumPad6:
+                    this.widthLocationOffset += -widthOffset;
+                    break;
+                case Keys.NumPad4:
+                    this.widthLocationOffset += heightOffset;
+                    break;
+                #endregion
+                #region up and down
+                case Keys.NumPad5:
                 case Keys.Down:
                     heightLocationOffset += -heightOffset;
                     break;
@@ -132,15 +149,18 @@ namespace ImageReader
                 case Keys.Up:
                     heightLocationOffset += heightOffset;
                     break;
+                #endregion
+                case Keys.P:
+                    btn_Collapse_Click(btn_Collapse, null);
+                    break;
                 case Keys.Add:
-                    ZoomImage(zoomAmount);
-                    break;
-                case Keys.NumPad0:
-                    heightOffset = 0;
-                    heightLocationOffset = 0;
-                    break;
+                    ZoomImage(zoomAmount); break;
                 case Keys.Subtract:
-                    ZoomImage(-zoomAmount);
+                    ZoomImage(-zoomAmount); break;
+                case Keys.NumPad0:
+                    this.zoomAmount = 0;
+                    widthLocationOffset = 0;
+                    heightLocationOffset = 0;
                     break;
                 default:
                     return base.ProcessCmdKey(ref msg, keyData);
@@ -191,7 +211,6 @@ namespace ImageReader
         }
         private void ResizePB()
         {
-
             this.PerformLayout();
             SuspendLayout();
             pb_Main.Height = pb_Main.Image.Height;
@@ -200,22 +219,24 @@ namespace ImageReader
             Rectangle rect = Screen.GetWorkingArea(pnl_Background); // for width
             Size background = pnl_Background.Size;
 
-            float ratio = (float)background.Height / ((float)pb_Main.Image.Height - heightOffset);
+            float ratio = background.Height / ((float)pb_Main.Image.Height);
+
+            pb_Main.Width = (int)((pb_Main.Image.Width * ratio) * Math.Pow(1.0f + zoomAmount, 2));
+            pb_Main.Height = (int)((pb_Main.Image.Height * ratio) * Math.Pow(1.0f + zoomAmount, 2));
 
 
-            pb_Main.Height = (int)(pb_Main.Height * ratio);
-            pb_Main.Width = (int)(pb_Main.Width * ratio);
-
-
-
-            pb_Main.Location = new Point((rect.Width - pb_Main.Width) / 2, (int)heightLocationOffset);
+            pb_Main.Location = new Point(
+                ((rect.Width - pb_Main.Width) / 2)
+                + (int)widthLocationOffset
+                ,
+                (int)heightLocationOffset
+            );
 
             ResumeLayout();
-
         }
-        private void ZoomImage(int amount)
+        private void ZoomImage(float amount)
         {
-            heightOffset += amount;
+            zoomAmount += amount;
             ResizePB();
         }
         private void SetOrder()
